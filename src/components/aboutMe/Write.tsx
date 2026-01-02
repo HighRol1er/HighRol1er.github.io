@@ -1,5 +1,3 @@
-import { ScrollHint } from "../ScrollHint";
-
 export function Write() {
   const reasons = [
     {
