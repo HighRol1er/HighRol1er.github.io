@@ -22,7 +22,9 @@ export function HeroSection() {
       <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
         프론트엔드 개발자로서의 여정을 기록합니다.
         <br className="hidden md:block" />
-        <span className="text-violet-400">React</span>, <span className="text-emerald-400">TypeScript</span>, 그리고 모던 웹 기술에 대해 공유해요.
+        <span className="text-violet-400">React</span>,{" "}
+        <span className="text-emerald-400">TypeScript</span>, 그리고 모던 웹
+        기술에 대해 공유해요.
       </p>
 
       {/* CTA 버튼 */}
@@ -32,7 +34,9 @@ export function HeroSection() {
           className="group px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-violet-500 text-white font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-0.5"
         >
           포스트 보기
-          <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+          <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
+            →
+          </span>
         </a>
         <a
           href="#about"
@@ -45,9 +49,9 @@ export function HeroSection() {
       {/* 통계 */}
       <div className="flex justify-center gap-12 mt-16">
         {[
-          { value: '42', label: 'Posts' },
-          { value: '128', label: 'TIL' },
-          { value: '∞', label: 'Passion' },
+          { value: "42", label: "Posts" },
+          { value: "128", label: "TIL" },
+          { value: "∞", label: "Passion" },
         ].map((stat) => (
           <div key={stat.label} className="text-center">
             <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent">
@@ -60,4 +64,3 @@ export function HeroSection() {
     </section>
   );
 }
-
