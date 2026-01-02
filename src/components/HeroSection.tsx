@@ -13,7 +13,7 @@ export function HeroSection() {
       {/* 메인 타이틀 */}
       <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
         <span className="text-white">Hello, I'm </span>
-        <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+        <span className="bg-linear-to-r from-violet-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
           HighRoller
         </span>
       </h1>
@@ -31,7 +31,7 @@ export function HeroSection() {
       <div className="flex flex-wrap justify-center gap-4">
         <a
           href="#posts"
-          className="group px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-violet-500 text-white font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-0.5"
+          className="group px-6 py-3 rounded-xl bg-linear-to-r from-violet-600 to-violet-500 text-white font-semibold shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 hover:-translate-y-0.5"
         >
           포스트 보기
           <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
@@ -54,7 +54,7 @@ export function HeroSection() {
           { value: "∞", label: "Passion" },
         ].map((stat) => (
           <div key={stat.label} className="text-center">
-            <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent">
+            <div className="text-2xl md:text-3xl font-bold bg-linear-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent">
               {stat.value}
             </div>
             <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
