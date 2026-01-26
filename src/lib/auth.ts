@@ -15,20 +15,20 @@ export async function hashPassword(password: string): Promise<string> {
 }
 
 /**
- * 입력한 비밀번호가 올바른지 확인합니다
+ * 입력한 토큰이 올바른지 확인합니다
+ * openssl rand -hex 32로 생성한 랜덤 토큰을 직접 비교
  */
-export async function verifyPassword(
-  inputPassword: string,
-  correctHash: string
-): Promise<boolean> {
-  const inputHash = await hashPassword(inputPassword);
-  return inputHash === correctHash;
+export function verifyToken(
+  inputToken: string,
+  correctToken: string
+): boolean {
+  return inputToken.trim() === correctToken.trim();
 }
 
 /**
- * 환경변수에서 올바른 해시를 가져옵니다
+ * 환경변수에서 올바른 토큰을 가져옵니다
  */
-export function getCorrectHash(): string {
+export function getCorrectToken(): string {
   return import.meta.env.VITE_WRITE_ACCESS_TOKEN || "";
 }
 
@@ -58,6 +58,6 @@ export function clearAuthToken(): void {
  */
 export function isAuthenticated(): boolean {
   const token = getAuthToken();
-  const correctHash = getCorrectHash();
-  return token === correctHash && token !== "";
+  const correctToken = getCorrectToken();
+  return token === correctToken && token !== "";
 }

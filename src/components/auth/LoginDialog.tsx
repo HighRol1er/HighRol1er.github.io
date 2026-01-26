@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  verifyPassword,
-  getCorrectHash,
+  verifyToken,
+  getCorrectToken,
   setAuthToken,
-  hashPassword,
 } from "@/lib/auth";
 
 interface LoginDialogProps {
@@ -21,28 +20,27 @@ export function LoginDialog({ open, onClose, onSuccess }: LoginDialogProps) {
 
   if (!open) return null;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      const correctHash = getCorrectHash();
-      if (!correctHash) {
+      const correctToken = getCorrectToken();
+      if (!correctToken) {
         setError("인증 설정이 올바르지 않습니다.");
         setLoading(false);
         return;
       }
 
-      const isValid = await verifyPassword(password, correctHash);
+      const isValid = verifyToken(password, correctToken);
       if (isValid) {
-        const token = await hashPassword(password + Date.now().toString());
-        setAuthToken(token);
+        setAuthToken(correctToken);
         setPassword("");
         onSuccess();
         onClose();
       } else {
-        setError("비밀번호가 올바르지 않습니다.");
+        setError("토큰이 올바르지 않습니다.");
       }
     } catch (err) {
       setError("인증 중 오류가 발생했습니다.");
@@ -58,14 +56,14 @@ export function LoginDialog({ open, onClose, onSuccess }: LoginDialogProps) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="password" className="block text-sm font-medium mb-2">
-              비밀번호
+              접근 토큰
             </label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="비밀번호를 입력하세요"
+              placeholder="접근 토큰을 입력하세요"
               autoFocus
               disabled={loading}
             />
