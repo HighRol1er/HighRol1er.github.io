@@ -1,5 +1,14 @@
 [
   {
+    "title": "Fly Weight Pattern",
+    "body": "",
+    "tags": [
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-01-26",
+    "fileName": "flyweight.md"
+  },
+  {
     "title": "title2",
     "body": "sample2",
     "tags": [
