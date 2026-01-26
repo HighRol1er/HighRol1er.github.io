@@ -1,3 +1,4 @@
+import { SpotlightCard } from "@/components/common/cards";
 import {
   CardContent,
   CardDescription,
@@ -5,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Mail, Phone, Tag } from "lucide-react";
-import SpotlightCard from "@/components/SpotlightCard";
 
 export const AboutMe = () => {
   return (

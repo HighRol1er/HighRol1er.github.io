@@ -1,4 +1,4 @@
-import ProfileCard from "@/components/ProfileCard";
+import { ProfileCard } from "@/components/common/cards";
 
 export const Project = () => {
   return (

@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DefaultLayout from "@/components/layouts/DefaultLayout";
-import Header from "@/components/layouts/Header";
-import { PencilIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { fetchPosts } from "@/lib/fs";
 import type { PostMetadata } from "@/types";
+
+import { DefaultLayout, Header } from "@/components/layouts";
 import { PostCard } from "@/components/posts/PostCard";
+import { Button } from "@/components/ui/button";
+import { fetchPosts } from "@/lib/posts";
 import { useTags } from "@/providers/tag-provider";
-import { useSearchParams } from "react-router-dom";
+import { PencilIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const PostPage = () => {
   const navigate = useNavigate();

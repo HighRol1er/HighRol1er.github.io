@@ -1,9 +1,7 @@
-import { CircleUser, File, TagIcon } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -13,7 +11,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useTags } from "@/providers/tag-provider";
-import { Separator } from "@/components/ui/separator";
+import { CircleUser, File } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 // Menu items
 const items = [

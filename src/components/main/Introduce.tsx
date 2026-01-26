@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import SpotlightCard from "@/components/SpotlightCard";
+import { SpotlightCard } from "@/components/common/cards";
 
 export const Introduce = () => {
   return (
