@@ -4,8 +4,9 @@ import DefaultLayout from "@/components/layouts/DefaultLayout";
 import Header from "@/components/layouts/Header";
 import { PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { fetchPostsFromGitHub, truncateBody, type PostMetadata } from "@/lib/fs";
-import SpotlightCard from "@/components/SpotlightCard";
+import { fetchPosts } from "@/lib/fs";
+import type { PostMetadata } from "@/types";
+import { PostCard } from "@/components/posts/PostCard";
 
 export const PostPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const PostPage = () => {
   useEffect(() => {
     const loadPosts = async () => {
       setLoading(true);
-      const fetchedPosts = await fetchPostsFromGitHub();
+      const fetchedPosts = await fetchPosts();
       setPosts(fetchedPosts);
       setLoading(false);
     };
@@ -29,14 +30,16 @@ export const PostPage = () => {
 
   return (
     <DefaultLayout>
+      {/* HEADER  */}
       <Header title="Posts">
         <Button variant="default" onClick={handleNewPost}>
           <PencilIcon className="w-4 h-4" />
           New Post
         </Button>
       </Header>
-      <div className="p-4">
-        <div className="max-w-4xl mx-auto">
+      {/* CONTENT */}
+      <section className="p-4">
+        <div className="max-w-7xl mx-auto">
           {loading ? (
             <div className="text-center py-8 text-muted-foreground">
               포스트를 불러오는 중...
@@ -46,21 +49,14 @@ export const PostPage = () => {
               아직 작성된 포스트가 없습니다.
             </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col gap-2">
               {posts.map((post) => (
-                <SpotlightCard key={post.fileName}>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {truncateBody(post.body)}
-                    </p>
-                  </div>
-                </SpotlightCard>
+                <PostCard key={post.fileName} post={post} />
               ))}
             </div>
           )}
         </div>
-      </div>
+      </section>
     </DefaultLayout>
   );
 };
