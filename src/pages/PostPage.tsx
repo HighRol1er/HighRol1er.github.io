@@ -7,22 +7,39 @@ import { Button } from "@/components/ui/button";
 import { fetchPosts } from "@/lib/fs";
 import type { PostMetadata } from "@/types";
 import { PostCard } from "@/components/posts/PostCard";
+import { useTags } from "@/providers/tag-provider";
+import { useSearchParams } from "react-router-dom";
 
 export const PostPage = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState<PostMetadata[]>([]);
   const [loading, setLoading] = useState(true);
+  const { setTags } = useTags();
+  const [searchParams] = useSearchParams();
+  const tag = searchParams.get("tag");
 
   useEffect(() => {
     const loadPosts = async () => {
       setLoading(true);
       const fetchedPosts = await fetchPosts();
-      setPosts(fetchedPosts);
+
+      const allTags = new Set<string>();
+      fetchedPosts.forEach((post) => {
+        post.tags.forEach((tag) => allTags.add(tag));
+      });
+      setTags(allTags);
+
+      // 태그 필터링
+      const filteredPosts = tag
+        ? fetchedPosts.filter((post) => post.tags.includes(tag))
+        : fetchedPosts;
+      setPosts(filteredPosts);
+
       setLoading(false);
     };
 
     loadPosts();
-  }, []);
+  }, [setTags, tag]);
 
   const handleNewPost = () => {
     navigate("/posts/write");

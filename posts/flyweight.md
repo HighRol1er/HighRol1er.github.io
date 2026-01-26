@@ -14,21 +14,21 @@
 동일하거나 유사한 객체들의 데이터를 서로 공유해 메모리 사용량을 최소화하는 소프트웨어 디자인 패턴<br/>
 → 모든 객체를 인스턴스화 하지 않고 재사용할 수 있는 객체는 재사용해서 메모리를 덜 쓰게 만든다.
 
-## 슈퍼마리오? 
+## 슈퍼마리오?
 
 <img width="822" height="484" alt="스크린샷 2026-01-26 오후 3 38 44" src="https://github.com/user-attachments/assets/8ab360a9-2d4f-4a9d-8630-5af9db3e9555" />
 참고: https://www.youtube.com/watch?v=5ZXOV1ma35g
 
-## 불변성 
+## 불변성
 
 플라이웨이트는 생성자 매개변수들을 통해 상태를 한 번만 초기화해야 함 <br/>
-그리고 `setter`, `public` 필드들을 다른 객체들에 노출해서는 안됨 
+그리고 `setter`, `public` 필드들을 다른 객체들에 노출해서는 안됨
 
 ## 코드
 
 <img width="1080" height="700" alt="image" src="https://github.com/user-attachments/assets/b6458146-19b0-449d-9a62-2b3868c4261a" />
 
-`Tree` 클래스에서 반복되는 고유상태를 추출해 `TreeType` 클래스로 이동 시킴 
+`Tree` 클래스에서 반복되는 고유상태를 추출해 `TreeType` 클래스로 이동 시킴
 
 ```java
 // 공유 상태 (Extrinsic State)
@@ -50,7 +50,7 @@ public class Tree {
 }
 
 // 고유 상태 (Intrinsic State):
-// 나무의 이름, 색상, 텍스처는 공유 가능한 객체, 변함 X 
+// 나무의 이름, 색상, 텍스처는 공유 가능한 객체, 변함 X
 public class TreeType {
     private String name;
     private Color color;
@@ -73,7 +73,7 @@ public class TreeType {
 // cache `TreeType`
 // 팩토리이긴하나 계속 찍어내는게 아님
 public class TreeFactory {
-    // tree pool 
+    // tree pool
     static Map<String, TreeType> treeTypes = new HashMap<>();
 
     public static TreeType getTreeType(String name, Color color, String otherTreeData) {
@@ -91,9 +91,9 @@ public class Forest extends JFrame {
     private List<Tree> trees = new ArrayList<>();
 
     public void plantTree(int x, int y, String name, Color color, String otherTreeData) {
-        // TreeType은 가져오고 
+        // TreeType은 가져오고
         TreeType type = TreeFactory.getTreeType(name, color, otherTreeData);
-        // Tree는 새로 생성! 
+        // Tree는 새로 생성!
         Tree tree = new Tree(x, y, type);
         trees.add(tree);
     }
@@ -137,12 +137,14 @@ public class Demo {
     }
 }
 ```
+
 ## GC 처리 주의 사항
+
 - 관리되고 있는 인스턴스는 GC 처리되지 않는다.
 
-나무를 렌더링하는 작업을 다 끝내서 더 이상 나무를 생성할 일이 없다면 반드시 `TreeFactory`에 있는 `tree popl`을 비워줄 필요가 있다.<br/> 
-그래야 인스턴스에 대한 참조를 잃은 `Tree`들도 GC에 의해 수거된다. 비워주지 않으면 `Tree` 인스턴스들은 메모리에 쓸모 없이 남아 있게 된다. 
-
+나무를 렌더링하는 작업을 다 끝내서 더 이상 나무를 생성할 일이 없다면 반드시 `TreeFactory`에 있는 `tree popl`을 비워줄 필요가 있다.<br/>
+그래야 인스턴스에 대한 참조를 잃은 `Tree`들도 GC에 의해 수거된다. 비워주지 않으면 `Tree` 인스턴스들은 메모리에 쓸모 없이 남아 있게 된다.
 
 ## 심심해서 가져와 봄
+
 https://soniseli.itch.io/map-generator-wfc
