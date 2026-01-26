@@ -27,12 +27,12 @@ export const Introduce = () => {
             </ul>
             <ul>
               <li>
-                <span>2. 포기하지 않는 개발자 - 느려도 꾸준하게.</span>
+                <span>2. 낙담하지 않는 개발자 - 느려도 꾸준하게.</span>
               </li>
             </ul>
             <ul>
               <li>
-                <span>3. 세상을 바꿀 개발자 - 언어가 가진 힘을 믿습니다.</span>
+                <span>3. 모든지 즐겁게하는 개발자 - 개발은 즐거우니까!</span>
               </li>
             </ul>
           </article>

@@ -21,7 +21,7 @@ export const PostCard = ({ post }: { post: PostMetadata }) => {
           to={POST_URL(post.fileName)}
           className="text-sm text-muted-foreground hover:text-foreground shrink-0"
         >
-          View Post →
+          go to post →
         </Link>
       </div>
     </div>
