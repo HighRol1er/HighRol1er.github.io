@@ -52,3 +52,38 @@ export const parseAdmonitions = (markdown: string): string => {
 
   return result.join("\n");
 };
+
+export interface Heading {
+  level: number;
+  text: string;
+  id: string;
+}
+
+/**
+ * 마크다운에서 헤딩(#, ##, ###) 추출
+ * @param markdown - 원본 마크다운 문자열
+ * @returns 헤딩 배열
+ */
+export const extractHeadings = (markdown: string): Heading[] => {
+  const lines = markdown.split("\n");
+  const headings: Heading[] = [];
+
+  for (const line of lines) {
+    const match = line.match(/^(#{1,6})\s+(.+)$/);
+    if (match) {
+      const level = match[1].length;
+      const text = match[2].trim();
+      // ID 생성: 텍스트를 소문자로 변환하고 공백을 하이픈으로 변경
+      const id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .trim();
+      
+      headings.push({ level, text, id });
+    }
+  }
+
+  return headings;
+};

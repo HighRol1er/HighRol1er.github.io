@@ -1,6 +1,6 @@
 import type { PostMetadata } from "@/types";
 import { DefaultLayout, Header } from "@/components/layouts";
-import { Date, PostBadge, Admonition } from "@/components/posts";
+import { Date, PostBadge, Admonition, Agenda } from "@/components/posts";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -9,13 +9,14 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy, Check } from "lucide-react";
 import { useFetchPosts } from "@/hooks";
-import { parseAdmonitions } from "@/shared/lib/markdown-utils";
+import { parseAdmonitions, extractHeadings, type Heading } from "@/shared/lib/markdown-utils";
 
 export const PostDetailPage = () => {
   const { posts, loading } = useFetchPosts();
   const { fileName } = useParams<{ fileName: string }>();
   const [post, setPost] = useState<PostMetadata | null>(null);
   const [content, setContent] = useState<string>("");
+  const [headings, setHeadings] = useState<Heading[]>([]);
 
   useEffect(() => {
     const loadPost = async () => {
@@ -40,6 +41,11 @@ export const PostDetailPage = () => {
           let body = frontmatterMatch
             ? markdown.slice(frontmatterMatch[0].length).trim()
             : markdown;
+          
+          // 헤딩 추출 (Admonition 파싱 전에 원본 마크다운에서)
+          const extractedHeadings = extractHeadings(body);
+          setHeadings(extractedHeadings);
+          
           // Admonition 파싱
           body = parseAdmonitions(body);
           setContent(body);
@@ -77,35 +83,69 @@ export const PostDetailPage = () => {
       <Header title={post.title} />
 
       <article className="px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* 메타 정보 */}
-          <div className="mb-6 pb-6 border-primary border-b-2">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.map((tag, index) => (
-                <PostBadge key={index} tag={tag} />
-              ))}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              <Date date={post.timestamp} />
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex gap-8">
+            {/* 메인 컨텐츠 */}
+            <div className="flex-1 max-w-4xl">
+              {/* 메타 정보 */}
+              <div className="mb-6 pb-6 border-primary border-b-2">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {post.tags.map((tag, index) => (
+                    <PostBadge key={index} tag={tag} />
+                  ))}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <Date date={post.timestamp} />
+                </div>
+              </div>
 
-          {/* 본문 */}
-          <article className="markdown-body">
+              {/* 본문 */}
+              <article className="markdown-body">
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               components={{
-                h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold mt-8 mb-4">{children}</h1>
-                ),
-                h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold mt-6 mb-3">{children}</h2>
-                ),
-                h3: ({ children }) => (
-                  <h3 className="text-xl font-semibold mt-4 mb-2">
-                    {children}
-                  </h3>
-                ),
+                h1: ({ children }) => {
+                  const text = String(children);
+                  const id = text
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, "")
+                    .replace(/\s+/g, "-")
+                    .replace(/-+/g, "-")
+                    .trim();
+                  return (
+                    <h1 id={id} className="text-3xl font-bold mt-8 mb-4">
+                      {children}
+                    </h1>
+                  );
+                },
+                h2: ({ children }) => {
+                  const text = String(children);
+                  const id = text
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, "")
+                    .replace(/\s+/g, "-")
+                    .replace(/-+/g, "-")
+                    .trim();
+                  return (
+                    <h2 id={id} className="text-2xl font-bold mt-6 mb-3">
+                      {children}
+                    </h2>
+                  );
+                },
+                h3: ({ children }) => {
+                  const text = String(children);
+                  const id = text
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, "")
+                    .replace(/\s+/g, "-")
+                    .replace(/-+/g, "-")
+                    .trim();
+                  return (
+                    <h3 id={id} className="text-xl font-semibold mt-4 mb-2">
+                      {children}
+                    </h3>
+                  );
+                },
                 p: ({ children }) => (
                   <p className="mb-4 leading-7">{children}</p>
                 ),
@@ -356,7 +396,14 @@ export const PostDetailPage = () => {
             >
               {content}
             </ReactMarkdown>
-          </article>
+              </article>
+            </div>
+
+            {/* 목차 (오른쪽 사이드바) */}
+            <aside className="hidden lg:block w-64 shrink-0">
+              <Agenda headings={headings} />
+            </aside>
+          </div>
         </div>
       </article>
     </DefaultLayout>
