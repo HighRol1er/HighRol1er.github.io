@@ -1,7 +1,7 @@
 ---
-title: [JavaScript] - 일급 객체
+title: 일급 객체
 tags: [JavaScript]
-date: 2026-02-17
+date: 2026-01-27
 ---
 
 # 일급 객체 First-class citizen

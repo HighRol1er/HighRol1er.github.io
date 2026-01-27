@@ -1,11 +1,36 @@
 [
   {
-    "title": "EX",
+    "title": "Garbage Collection",
     "tags": [
-      "example"
+      "GC"
     ],
-    "timestamp": "2026-01-26",
-    "fileName": "exampl.md"
+    "timestamp": "2026-01-27",
+    "fileName": "about-gc.md"
+  },
+  {
+    "title": "일급 객체",
+    "tags": [
+      "JavaScript"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "first-class-object.md"
+  },
+  {
+    "title": "SPA, MPA란?",
+    "tags": [
+      "SPA",
+      "MPA"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "spa-and-map.md"
+  },
+  {
+    "title": "AJAX + XML 개념정리",
+    "tags": [
+      "AJAX"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "what-is-ajax.md"
   },
   {
     "title": "Fly Weight Pattern",

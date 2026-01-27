@@ -150,16 +150,16 @@ export const PostDetailPage = () => {
                   <p className="mb-4 leading-7">{children}</p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside mb-4 space-y-2 ml-4">
+                  <ul className="list-disc list-outside mb-4 space-y-2 ml-6">
                     {children}
                   </ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">
+                  <ol className="list-decimal list-outside mb-4 space-y-2 ml-6">
                     {children}
                   </ol>
                 ),
-                li: ({ children }) => <li className="ml-2">{children}</li>,
+                li: ({ children }) => <li className="leading-7">{children}</li>,
                 code: ({ children, className, ...props }: any) => {
                   const match = /language-(\w+)/.exec(className || "");
                   const isInline = !className || !match;
