@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import MainPage from "./pages/MainPage";
 import PostPage from "./pages/PostPage";
-import WritePage from "./pages/WritePage";
+import PostDetailPage from "./pages/PostDetailPage";
+import CherryPickPage from "./pages/CherryPickPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ export const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
-        path: "posts/write",
-        element: <WritePage />,
+        path: "posts/detail/:fileName",
+        element: <PostDetailPage />,
+      },
+      {
+        path: "cherry-pick",
+        element: <CherryPickPage />,
       },
     ],
   },

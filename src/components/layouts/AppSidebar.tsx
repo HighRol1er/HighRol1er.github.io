@@ -10,9 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useTags } from "@/providers/tag-provider";
-import { CircleUser, File } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Cherry, CircleUser, File } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useFetchPosts } from "@/hooks";
+import { useMemo } from "react";
 
 // Menu items
 const items = [
@@ -26,14 +28,29 @@ const items = [
     url: "/posts",
     icon: File,
   },
+  {
+    title: "Cherry Pick",
+    url: "/cherry-pick",
+    icon: Cherry,
+  },
 ];
 
 export function AppSidebar() {
-  const { tags } = useTags();
   const location = useLocation();
+  const { posts } = useFetchPosts();
 
-  // 현재 경로 확인
-  console.log("Current path:", location.pathname);
+  // 태그 수집 (PostPage의 로직을 여기로 이동)
+  const tags = useMemo(() => {
+    const allTags = new Set<string>();
+    posts.forEach((post) => {
+      post.tags.forEach((t) => allTags.add(t));
+    });
+    return allTags;
+  }, [posts]);
+
+  const getTagCount = (tag: string) => {
+    return posts.filter((post) => post.tags.includes(tag)).length;
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -51,7 +68,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild tooltip={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    tooltip={item.title}
+                    className="font-figtree"
+                  >
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -61,23 +82,29 @@ export function AppSidebar() {
               ))}
               <Separator />
               {location.pathname.includes("/posts") && (
-                <>
-                  <SidebarGroupLabel>Post Tags</SidebarGroupLabel>
+                <div className="group-data-[collapsible=icon]:hidden">
+                  <SidebarGroupLabel className="font-figtree">
+                    Post Tags
+                  </SidebarGroupLabel>
                   <Link to="/posts">
                     <SidebarMenuButton tooltip="All Posts">
-                      <span>All Posts</span>
+                      <Badge className="dark:bg-green-950 dark:text-green-300">
+                        All ({posts.length})
+                      </Badge>
                     </SidebarMenuButton>
                   </Link>
-                  {Array.from(tags).map((tag) => (
+                  {Array.from(tags).sort().map((tag) => (
                     <SidebarMenuItem key={tag}>
                       <SidebarMenuButton tooltip={tag}>
                         <Link to={`/posts?tag=${tag}`}>
-                          <span>{tag}</span>
+                          <Badge className="bg-purple-50 text-purple-700 dark:bg-purple-900 dark:text-purple-200 ">
+                            {tag} ({getTagCount(tag)})
+                          </Badge>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
-                </>
+                </div>
               )}
             </SidebarMenu>
           </SidebarGroupContent>

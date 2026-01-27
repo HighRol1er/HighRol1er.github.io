@@ -11,8 +11,8 @@ export const Project = () => {
             title=""
             handle="Crypto Express"
             status="Online"
-            avatarUrl="/cryptoexpress.png"
-            iconUrl="/cryptoexpress.png"
+            avatarUrl="/assets/project/cryptoexpress.png"
+            iconUrl="/assets/project/cryptoexpress.png"
             grainUrl=""
             contactText="Website"
             enableTilt={true}
@@ -29,8 +29,8 @@ export const Project = () => {
             title=""
             handle="Popup Journey"
             status="Offline"
-            avatarUrl="/popup-journey.png"
-            iconUrl="/popup-journey.png"
+            avatarUrl="/assets/project/popup-journey.png"
+            iconUrl="/assets/project/popup-journey.png"
             grainUrl=""
             enableTilt={true}
             contactText="Visit"
@@ -50,8 +50,8 @@ export const Project = () => {
             title=""
             handle="Devrium"
             status="Offline"
-            avatarUrl="/devrium.png"
-            iconUrl="/devrium.png"
+            avatarUrl="/assets/project/devrium.png"
+            iconUrl="/assets/project/devrium.png"
             grainUrl=""
             enableTilt={true}
             contactText="Visit"

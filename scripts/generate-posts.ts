@@ -3,67 +3,84 @@ import path from "path";
 
 interface PostMetadata {
   title: string;
-  body: string;
   tags: string[];
   timestamp: string;
   fileName: string;
 }
 
-function parseMarkdown(content: string, fileName: string, filePath: string): { 
-  title: string; 
-  body: string; 
+function parseMarkdown(
+  content: string,
+  fileName: string,
+  filePath: string,
+): {
+  title: string;
   tags: string[];
   timestamp: string;
 } {
-  const titleMatch = content.match(/<title>(.*?)<\/title>/s);
-  const title = titleMatch ? titleMatch[1].trim() : "";
-
-  const bodyMatch = content.match(/<body>(.*?)<\/body>/s);
-  const body = bodyMatch ? bodyMatch[1].trim() : "";
-
-  // 태그 추출 (여러 개의 <tag> 태그 또는 하나의 태그에 콤마로 구분)
+  let title = "";
   const tags: string[] = [];
-  
-  // 여러 개의 <tag>...</tag> 태그 찾기
-  const tagMatches = content.matchAll(/<tag>(.*?)<\/tag>/gs);
-  for (const match of tagMatches) {
-    const tagContent = match[1].trim();
-    // 콤마로 구분된 태그들 분리
-    const tagList = tagContent.split(",").map(t => t.trim()).filter(t => t);
-    tags.push(...tagList);
-  }
-
-  // 중복 제거
-  const uniqueTags = Array.from(new Set(tags));
-
-  // 타임스탬프 추출 (우선순위: <date> 태그 > 파일명 날짜 > 파일 수정 시간)
   let timestamp = "";
 
-  // 1. <date> 태그에서 추출
-  const dateMatch = content.match(/<date>(.*?)<\/date>/s);
-  if (dateMatch) {
-    timestamp = dateMatch[1].trim();
-  } else {
-    // 2. 파일명에서 날짜 추출 (YYYY-MM-DD 형식)
+  // YAML frontmatter 형식 파싱 (---로 감싸진 블록)
+  const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
+
+  if (frontmatterMatch) {
+    const frontmatter = frontmatterMatch[1];
+
+    // title 추출
+    const titleMatch = frontmatter.match(/^title:\s*(.+)$/m);
+    if (titleMatch) {
+      title = titleMatch[1].trim().replace(/^["']|["']$/g, ""); // 따옴표 제거
+    }
+
+    // tags 추출 (배열 형식: [tag1, tag2])
+    const tagsMatch = frontmatter.match(/^tags:\s*(.+)$/m);
+    if (tagsMatch) {
+      const tagsContent = tagsMatch[1].trim();
+      // 배열 형식 [tag1, tag2] 파싱
+      const arrayMatch = tagsContent.match(/^\[(.*)\]$/);
+      if (arrayMatch) {
+        const tagList = arrayMatch[1]
+          .split(",")
+          .map((t) => t.trim().replace(/^["']|["']$/g, ""))
+          .filter((t) => t);
+        tags.push(...tagList);
+      }
+    }
+
+    // date 추출 (timestamp로 사용)
+    const dateMatch = frontmatter.match(/^date:\s*(.+)$/m);
+    if (dateMatch) {
+      timestamp = dateMatch[1].trim();
+    }
+  }
+
+  // date가 없으면 fallback (파일명 날짜 > 파일 수정 시간)
+  if (!timestamp) {
+    // 파일명에서 날짜 추출 (YYYY-MM-DD 형식)
     const dateFromFileName = fileName.match(/^(\d{4}-\d{2}-\d{2})/);
     if (dateFromFileName) {
       timestamp = dateFromFileName[1];
     } else {
-      // 3. 파일 수정 시간 사용
+      // 파일 수정 시간 사용
       const stats = fs.statSync(filePath);
       timestamp = stats.mtime.toISOString().split("T")[0]; // YYYY-MM-DD
     }
   }
 
-  return { title, body, tags: uniqueTags, timestamp };
+  const uniqueTags = Array.from(new Set(tags));
+  return { title, tags: uniqueTags, timestamp };
 }
 
 function generatePostsJson() {
-  const postsDir = path.join(process.cwd(), "posts");
+  // public/posts 폴더에서 게시글 읽기 (단일 소스)
+  const postsDir = path.join(process.cwd(), "public", "_posts");
   const outputPath = path.join(process.cwd(), "public", "posts.json");
 
+  // public/posts 폴더가 없으면 생성
   if (!fs.existsSync(postsDir)) {
-    console.log("posts 폴더가 없습니다. 빈 배열로 생성합니다.");
+    fs.mkdirSync(postsDir, { recursive: true });
+    console.log("public/_posts 폴더가 없습니다. 생성했습니다.");
     fs.writeFileSync(outputPath, JSON.stringify([], null, 2));
     return;
   }
@@ -76,12 +93,11 @@ function generatePostsJson() {
   for (const file of mdFiles) {
     const filePath = path.join(postsDir, file);
     const content = fs.readFileSync(filePath, "utf-8");
-    const { title, body, tags, timestamp } = parseMarkdown(content, file, filePath);
+    const { title, tags, timestamp } = parseMarkdown(content, file, filePath);
 
     if (title) {
       posts.push({
         title,
-        body,
         tags,
         timestamp,
         fileName: file,

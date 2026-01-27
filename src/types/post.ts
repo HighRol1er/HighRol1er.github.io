@@ -3,4 +3,5 @@ export interface PostMetadata {
   tags: string[];
   timestamp: string;
   fileName: string;
+  date: string;
 }
