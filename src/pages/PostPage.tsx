@@ -39,9 +39,9 @@ export const PostPage = () => {
       <Header title="Posts" />
       <section>
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-2">
-            {filteredPosts.map((post) => (
-              <PostCard key={post.fileName} post={post} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-2">
+            {filteredPosts.map((post, index) => (
+              <PostCard key={post.fileName} post={post} index={index} />
             ))}
           </div>
         </div>

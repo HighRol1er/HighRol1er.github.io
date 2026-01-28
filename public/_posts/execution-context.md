@@ -1,7 +1,7 @@
 ---
 title: 실행 컨텍스트 그리고 호이스팅과 클로저까지
 tags: [JavaScript]
-date: 2026-01-27
+date: 2026-01-28
 ---
 
 실행 컨텍스트는 JavaScript의 동작 원리를 담고 있는 핵심 개념입니다.  
@@ -232,3 +232,38 @@ innerFunc();
 이처럼 외부함수보다 중첩함수가 더 오래 유지되는 경우  
 즉, 중첩 함수는 이미 생명 주기가 종료한 외부 함수의 변수를 참조할 수 있으며 이러한 중첩함수를 클로저라고 부릅니다.  
 이는 이후에 GC와도 연관되며 메모리 누수의 개념까지 이어지게 됩니다.!!
+
+## 클로저를 사용한 예제 - 커링
+
+이 부분은 중요하진 않으나 클로저를 이해하면 다음과같은 함수형 프로그래밍 코드를 보아도 당황하지 않습니다.  
+흔하진 않지만 그래도 조금 재밌는 커링이라는 예제입니다.  
+저도 이해하는데 꽤나 애먹었습니다...
+
+```js
+function sum(x, y) {
+  console.log(x + y); // 원래는 return (x + y)이나 console.log()로 반환하면 디버깅이 쉽더라구요
+}
+
+function curry(f) {
+  return function (a) {
+    return function (b) {
+      return f(a, b);
+    };
+  };
+}
+
+let curriedFn = curry(sum);
+
+curriedFn(1)(2);
+```
+
+글이 길어지니 다음과같은 코드 주석만 남기겠습니다.
+
+```js
+console.log(curriedFn(1));
+
+// ---console---
+// function (b) {
+//   return f(a, b); // 익명함수는 이미 a의 값을 기억하고 있습니다. 상위 스코프를 참조!
+// }
+```

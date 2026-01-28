@@ -1,19 +1,27 @@
 [
   {
+    "title": "합성 컴포넌트",
+    "tags": [
+      "React"
+    ],
+    "timestamp": "2026-01-28",
+    "fileName": "composition-component.md"
+  },
+  {
+    "title": "실행 컨텍스트 그리고 호이스팅과 클로저까지",
+    "tags": [
+      "JavaScript"
+    ],
+    "timestamp": "2026-01-28",
+    "fileName": "execution-context.md"
+  },
+  {
     "title": "Garbage Collection",
     "tags": [
       "GC"
     ],
     "timestamp": "2026-01-27",
     "fileName": "about-gc.md"
-  },
-  {
-    "title": "실행 컨텍스트",
-    "tags": [
-      "JavaScript"
-    ],
-    "timestamp": "2026-01-27",
-    "fileName": "execution-context.md"
   },
   {
     "title": "일급 객체",
