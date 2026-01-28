@@ -1,12 +1,6 @@
 import type { PostMetadata } from "@/types";
 import { DefaultLayout, Header } from "@/components/layouts";
-import {
-  Date,
-  PostBadge,
-  Admonition,
-  Agenda,
-  PostMetaData,
-} from "@/components/posts";
+import { Admonition, Agenda, PostMetaData } from "@/components/posts";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
