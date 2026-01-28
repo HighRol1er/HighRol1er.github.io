@@ -1,5 +1,6 @@
 import type { Heading } from "@/shared/lib/markdown-utils";
 import { useEffect } from "react";
+import { Separator } from "@/components/ui/separator";
 
 interface AgendaProps {
   headings: Heading[];
@@ -34,9 +35,11 @@ export const Agenda = ({ headings }: AgendaProps) => {
   }
 
   return (
-    <div className="sticky top-20 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto">
+    <div className="sticky top-29 h-fit max-h-[calc(100vh-5rem)] overflow-y-auto">
       <div className="bg-transparent rounded-lg p-4">
         <h3 className="text-sm font-semibold mb-3 text-foreground">목차</h3>
+        <Separator className="bg-primary" />
+        <div className="pb-6"></div>
         <nav className="space-y-1">
           {headings.map((heading, index) => (
             <a

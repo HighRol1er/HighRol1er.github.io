@@ -1,15 +1,26 @@
 import type { PostMetadata } from "@/types";
 import { DefaultLayout, Header } from "@/components/layouts";
-import { Date, PostBadge, Admonition, Agenda } from "@/components/posts";
+import {
+  Date,
+  PostBadge,
+  Admonition,
+  Agenda,
+  PostMetaData,
+} from "@/components/posts";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy, Check } from "lucide-react";
 import { useFetchPosts } from "@/hooks";
-import { parseAdmonitions, extractHeadings, type Heading } from "@/shared/lib/markdown-utils";
+import {
+  parseAdmonitions,
+  extractHeadings,
+  type Heading,
+} from "@/shared/lib/markdown-utils";
 
 export const PostDetailPage = () => {
   const { posts, loading } = useFetchPosts();
@@ -29,9 +40,9 @@ export const PostDetailPage = () => {
       if (!foundPost) {
         return;
       }
+
       setPost(foundPost);
 
-      // 2. 마크다운 파일 내용 가져오기 (public/_posts 폴더에서)
       try {
         const response = await fetch(`/_posts/${fileName}`);
         if (response.ok) {
@@ -41,11 +52,11 @@ export const PostDetailPage = () => {
           let body = frontmatterMatch
             ? markdown.slice(frontmatterMatch[0].length).trim()
             : markdown;
-          
+
           // 헤딩 추출 (Admonition 파싱 전에 원본 마크다운에서)
           const extractedHeadings = extractHeadings(body);
           setHeadings(extractedHeadings);
-          
+
           // Admonition 파싱
           body = parseAdmonitions(body);
           setContent(body);
@@ -58,21 +69,11 @@ export const PostDetailPage = () => {
     loadPost();
   }, [fileName, posts]);
 
-  if (loading) {
+  if (loading || !post) {
     return (
       <DefaultLayout>
         <div className="text-center py-8 text-muted-foreground">
-          포스트를 불러오는 중...
-        </div>
-      </DefaultLayout>
-    );
-  }
-
-  if (!post) {
-    return (
-      <DefaultLayout>
-        <div className="text-center py-8 text-muted-foreground">
-          포스트를 찾을 수 없습니다.
+          게시글을 찾을 수 없습니다.
         </div>
       </DefaultLayout>
     );
@@ -82,26 +83,14 @@ export const PostDetailPage = () => {
     <DefaultLayout>
       <Header title={post.title} />
 
-      <article className="px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex gap-8">
-            {/* 메인 컨텐츠 */}
-            <div className="flex-1 max-w-4xl">
-              {/* 메타 정보 */}
-              <div className="mb-6 pb-6 border-primary border-b-2">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.map((tag, index) => (
-                    <PostBadge key={index} tag={tag} />
-                  ))}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  <Date date={post.timestamp} />
-                </div>
-              </div>
+      <article className="px-2 sm:px-4 max-w-7xl mx-auto flex gap-4 ">
+        <div className="flex-1 max-w-4xl">
+          <PostMetaData post={post} />
 
-              {/* 본문 */}
-              <article className="markdown-body">
+          {/* 본문 */}
+          <article className="markdown-body">
             <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
                 h1: ({ children }) => {
@@ -372,39 +361,48 @@ export const PostDetailPage = () => {
                         src={webpSrc}
                         alt={alt}
                         className="w-full object-contain my-4 rounded-lg"
-                        style={{ height: "400px" }}
                       />
                     </picture>
                   );
                 },
                 table: ({ children }) => (
-                  <div className="overflow-x-auto my-4">
-                    <table className="min-w-full border-collapse border border-border">
+                  <div className="overflow-x-auto my-6 rounded-lg border border-border shadow-sm">
+                    <table className="min-w-full border-collapse">
                       {children}
                     </table>
                   </div>
                 ),
+                thead: ({ children }) => (
+                  <thead className="bg-muted/50">{children}</thead>
+                ),
+                tbody: ({ children }) => (
+                  <tbody className="divide-y divide-border [&>tr]:transition-colors [&>tr]:hover:bg-muted/30">
+                    {children}
+                  </tbody>
+                ),
+                tr: ({ children }) => <tr>{children}</tr>,
                 th: ({ children }) => (
-                  <th className="border border-border px-4 py-2 bg-muted font-semibold text-left">
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-foreground border-b border-border">
                     {children}
                   </th>
                 ),
                 td: ({ children }) => (
-                  <td className="border border-border px-4 py-2">{children}</td>
+                  <td className="px-6 py-4 text-sm text-foreground/90">
+                    {children}
+                  </td>
                 ),
               }}
             >
               {content}
             </ReactMarkdown>
-              </article>
-            </div>
-
-            {/* 목차 (오른쪽 사이드바) */}
-            <aside className="hidden lg:block w-64 shrink-0">
-              <Agenda headings={headings} />
-            </aside>
-          </div>
+          </article>
+          <div className="pb-[300px]"></div>
         </div>
+
+        {/* 목차 (오른쪽 사이드바) */}
+        <aside className="hidden lg:block w-64 shrink-0">
+          <Agenda headings={headings} />
+        </aside>
       </article>
     </DefaultLayout>
   );

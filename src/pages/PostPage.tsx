@@ -37,7 +37,7 @@ export const PostPage = () => {
   return (
     <DefaultLayout>
       <Header title="Posts" />
-      <section className="p-2">
+      <section>
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col gap-2">
             {filteredPosts.map((post) => (

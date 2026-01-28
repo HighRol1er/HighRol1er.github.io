@@ -8,12 +8,28 @@
     "fileName": "about-gc.md"
   },
   {
+    "title": "실행 컨텍스트",
+    "tags": [
+      "JavaScript"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "execution-context.md"
+  },
+  {
     "title": "일급 객체",
     "tags": [
       "JavaScript"
     ],
     "timestamp": "2026-01-27",
     "fileName": "first-class-object.md"
+  },
+  {
+    "title": "얕은 복사와 깊은 복사",
+    "tags": [
+      "JavaScript"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "shallow-deep-copy.md"
   },
   {
     "title": "SPA, MPA란?",
@@ -31,6 +47,14 @@
     ],
     "timestamp": "2026-01-27",
     "fileName": "what-is-ajax.md"
+  },
+  {
+    "title": "Websocket 데이터 전송 분석",
+    "tags": [
+      "Websocket"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "ws-opt.md"
   },
   {
     "title": "Fly Weight Pattern",

@@ -27,3 +27,13 @@ date: 2026-01-26
 
 > [!tip]
 > TIP
+
+---
+
+<span style="color:indianred">TEXT</span>
+<span style="color:orange">TEXT</span>
+<span style="color:skyblue">TEXT</span>
+
+→←↑↓
+
+---
