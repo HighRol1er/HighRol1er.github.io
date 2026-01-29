@@ -9,7 +9,7 @@ const MainPage = () => {
   return (
     <DefaultLayout>
       <Header title="Whoami" />
-      <div className="grid auto-rows-min gap-4 md:grid-cols-3 ">
+      <div className="grid gap-4 justify-center grid-cols-1 md:grid-cols-3 ">
         <AboutMe />
         <Introduce />
         <Stacks />

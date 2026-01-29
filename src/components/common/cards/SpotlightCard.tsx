@@ -29,7 +29,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      className={`card-spotlight ${className}`}
+      className={`card-spotlight p-4 md:p-6 lg:p-8 ${className}`}
     >
       {children}
     </div>

@@ -1,11 +1,36 @@
 [
   {
+    "title": "Dependency Injection - 의존성 주입",
+    "tags": [
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-01-29",
+    "fileName": "di.md"
+  },
+  {
+    "title": "테스트 주도 개발(자)",
+    "tags": [
+      "TDD",
+      "Testing"
+    ],
+    "timestamp": "2026-01-29",
+    "fileName": "tdd.md"
+  },
+  {
     "title": "합성 컴포넌트",
     "tags": [
       "React"
     ],
     "timestamp": "2026-01-28",
     "fileName": "composition-component.md"
+  },
+  {
+    "title": "개발자 블로그를 만들면서...",
+    "tags": [
+      "Doodle"
+    ],
+    "timestamp": "2026-01-28",
+    "fileName": "doodle1.md"
   },
   {
     "title": "실행 컨텍스트 그리고 호이스팅과 클로저까지",

@@ -13,7 +13,7 @@ export const AboutMe = () => {
       <div className="flex flex-col gap-4">
         <CardHeader>
           <CardTitle>Contact</CardTitle>
-          <CardDescription>Get in touch with me..</CardDescription>
+          <CardDescription>Get in touch with me!</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2">

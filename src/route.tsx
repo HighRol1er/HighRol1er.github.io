@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import MainPage from "./pages/MainPage";
-import PostPage from "./pages/PostPage";
-import PostDetailPage from "./pages/PostDetailPage";
-import CherryPickPage from "./pages/CherryPickPage";
+import App from "@/App";
+import MainPage from "@/pages/MainPage";
+import PostPage from "@/pages/PostPage";
+import PostDetailPage from "@/pages/PostDetailPage";
+import CherryPickPage from "@/pages/CherryPickPage";
 
 export const router = createBrowserRouter([
   {
