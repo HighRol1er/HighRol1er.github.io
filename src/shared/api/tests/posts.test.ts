@@ -1,5 +1,5 @@
 import { test, expect, vi } from "vitest";
-import { getPosts } from "../posts";
+import { fetchPosts } from "@/shared/api/posts";
 import { mockPosts } from "@/shared/mocks/posts.mock";
 
 test("게시글 불러오기 성공", async () => {
@@ -7,7 +7,7 @@ test("게시글 불러오기 성공", async () => {
     ok: true,
     json: async () => mockPosts,
   });
-  const response = await getPosts();
+  const response = await fetchPosts();
 
   expect(response).toEqual(mockPosts);
 });
@@ -18,7 +18,7 @@ test("게시글 불러오기 실패", async () => {
     statusText: "Internal Server Error",
   });
 
-  const response = await getPosts();
+  const response = await fetchPosts();
 
   expect(response).toEqual([]);
 });

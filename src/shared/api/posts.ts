@@ -16,15 +16,3 @@ export async function fetchPosts(): Promise<PostMetadata[]> {
     return [];
   }
 }
-
-export async function getPosts(): Promise<PostMetadata[]> {
-  try {
-    const response = await fetch("/posts.json");
-    if (!response.ok) {
-      console.error("Failed to fetch posts.json", response.statusText);
-    }
-    return response.json();
-  } catch (error) {
-    return [];
-  }
-}
