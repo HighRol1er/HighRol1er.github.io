@@ -98,10 +98,13 @@ test("게시글 불러오기 성공", async () => {
 ```ts
 export async function getPosts(): Promise<PostMetadata[]> {
   const response = await fetch("/posts/posts.json");
+
   if (!response.ok) {
     console.error("Failed to fetch posts.json", response.statusText);
   }
-  return response.json();
+
+  const posts = await response.json();
+  return posts;
 }
 ```
 
@@ -133,10 +136,13 @@ test("게시글 불러오기 실패", async () => {
 export async function getPosts(): Promise<PostMetadata[]> {
   try {
     const response = await fetch("/posts.json");
+
     if (!response.ok) {
       console.error("Failed to fetch posts.json", response.statusText);
     }
-    return response.json();
+
+    const posts = await response.json();
+    return posts;
   } catch (error) {
     return [];
   }
