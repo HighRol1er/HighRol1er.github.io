@@ -1,3 +1,5 @@
+import { Logo } from "@/components/common";
+import { Tags } from "@/components/posts";
 import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
@@ -10,30 +12,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
-import { Cherry, CircleUser, File } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
 import { useFetchPosts } from "@/hooks";
+import { NAV } from "@/shared/constants";
 import { useMemo } from "react";
-
-// Menu items
-const items = [
-  {
-    title: "Whoami",
-    url: "/",
-    icon: CircleUser,
-  },
-  {
-    title: "Posts",
-    url: "/posts",
-    icon: File,
-  },
-  {
-    title: "Cherry Pick",
-    url: "/cherry-pick",
-    icon: Cherry,
-  },
-];
+import { Link, useLocation } from "react-router-dom";
 
 export function AppSidebar() {
   const location = useLocation();
@@ -57,7 +39,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <div className="flex items-center gap-2 px-2 py-1.5">
           <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold">Highroller 🎲</span>
+            <Logo />
           </div>
         </div>
       </SidebarHeader>
@@ -66,7 +48,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {NAV.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
@@ -80,7 +62,9 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
               <Separator />
+
               {location.pathname.includes("/posts") && (
                 <div className="group-data-[collapsible=icon]:hidden">
                   <SidebarGroupLabel className="font-figtree">
@@ -88,22 +72,24 @@ export function AppSidebar() {
                   </SidebarGroupLabel>
                   <Link to="/posts">
                     <SidebarMenuButton tooltip="All Posts">
-                      <Badge className="dark:bg-green-950 dark:text-green-300">
+                      <Tags className="dark:bg-green-950 dark:text-green-300">
                         All ({posts.length})
-                      </Badge>
+                      </Tags>
                     </SidebarMenuButton>
                   </Link>
-                  {Array.from(tags).sort().map((tag) => (
-                    <SidebarMenuItem key={tag}>
-                      <SidebarMenuButton tooltip={tag}>
-                        <Link to={`/posts?tag=${tag}`}>
-                          <Badge className="bg-purple-50 text-purple-700 dark:bg-purple-900 dark:text-purple-200 ">
-                            {tag} ({getTagCount(tag)})
-                          </Badge>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
+                  {Array.from(tags)
+                    .sort()
+                    .map((tag) => (
+                      <SidebarMenuItem key={tag}>
+                        <SidebarMenuButton tooltip={tag}>
+                          <Link to={`/posts?tag=${tag}`}>
+                            <Tags>
+                              {tag} ({getTagCount(tag)})
+                            </Tags>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
                 </div>
               )}
             </SidebarMenu>

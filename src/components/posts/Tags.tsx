@@ -1,17 +1,12 @@
 import { Badge } from "@/components/ui/badge";
-
-interface PostBadgeProps {
-  tag: string;
-  key: number;
+interface TagsProps {
+  children: React.ReactNode;
+  className?: string;
 }
 
-export const Tags = ({ tag, key }: PostBadgeProps) => {
-  return (
-    <Badge
-      key={key}
-      className="bg-purple-50 text-purple-700 dark:bg-purple-900 dark:text-purple-200"
-    >
-      {tag}
-    </Badge>
-  );
+export const Tags = ({
+  children,
+  className = "bg-purple-50 text-purple-700 dark:bg-purple-900 dark:text-purple-200",
+}: TagsProps) => {
+  return <Badge className={className}>{children}</Badge>;
 };
