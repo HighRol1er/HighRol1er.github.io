@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection
-tags: [GC]
+tags: [GC, JavaScript]
 date: 2026-01-27
 ---
 
