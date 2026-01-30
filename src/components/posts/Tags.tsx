@@ -5,7 +5,7 @@ interface PostBadgeProps {
   key: number;
 }
 
-export const PostBadge = ({ tag, key }: PostBadgeProps) => {
+export const Tags = ({ tag, key }: PostBadgeProps) => {
   return (
     <Badge
       key={key}
