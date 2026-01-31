@@ -1,5 +1,4 @@
-// import { slugify } from "../markdown-utils";
-import { describe, it, expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { slugify } from "../markdown-utils";
 
 describe("slugify-util 함수 테스트", () => {

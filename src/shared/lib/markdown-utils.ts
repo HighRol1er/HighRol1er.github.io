@@ -1,10 +1,23 @@
+import type { ReactNode } from "react";
+import { type ReactElement, isValidElement } from "react";
+
+export const extractText = (children: ReactNode): string => {
+  if (typeof children === "string") {
+    return children;
+  } else if (isValidElement(children)) {
+    const element = children as ReactElement<{ children?: ReactNode }>;
+    const content = element.props.children;
+    return typeof content === "string" ? content : "";
+  }
+  return "";
+};
+
 export const slugify = (text: string): string => {
-  const slug = String(text)
+  const slug = text
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "-") // 공백 -> '-'
-    .replace(/\-+/g, "-"); // 연속된 하이픈 제거
-
+    .replace(/-+/g, "-"); // 연속된 하이픈 제거
   return slug;
 };
 
