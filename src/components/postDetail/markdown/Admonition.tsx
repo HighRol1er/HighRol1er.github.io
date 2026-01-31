@@ -60,7 +60,7 @@ export const Admonition = ({ type, children }: AdmonitionProps) => {
       <div className={`${config.iconColor} shrink-0 mt-0.5`}>
         <Icon className="w-5 h-5" />
       </div>
-      <div className="flex-1 text-foreground">{children}</div>
+      <div className="flex-1 text-foreground [&>p]:mb-0">{children}</div>
     </div>
   );
 };

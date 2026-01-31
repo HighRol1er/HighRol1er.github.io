@@ -43,7 +43,8 @@
   {
     "title": "Garbage Collection",
     "tags": [
-      "GC"
+      "GC",
+      "JavaScript"
     ],
     "timestamp": "2026-01-27",
     "fileName": "about-gc.md"
@@ -72,6 +73,14 @@
     ],
     "timestamp": "2026-01-27",
     "fileName": "spa-and-map.md"
+  },
+  {
+    "title": "TEST",
+    "tags": [
+      "test"
+    ],
+    "timestamp": "2026-01-27",
+    "fileName": "test.md"
   },
   {
     "title": "AJAX + XML 개념정리",

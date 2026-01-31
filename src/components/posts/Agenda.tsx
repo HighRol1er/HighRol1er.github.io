@@ -23,10 +23,24 @@ export const Agenda = ({ headings }: AgendaProps) => {
     });
   }, [headings]);
 
+  // const handleClick = (id: string) => {
+  //   const element = document.getElementById(id);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  // };
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      // 1. 요소의 절대 위치(y)를 구합니다.
+      const elementPosition = element.getBoundingClientRect().top;
+      // 2. 현재 스크롤 위치와 합치고 헤더 높이(64px)를 뺍니다.
+      const offsetPosition = elementPosition + window.pageYOffset - 64;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
