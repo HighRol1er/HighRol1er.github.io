@@ -1,8 +1,5 @@
 import type { PostMetadata } from "@/types";
 
-/**
- * Fetch post MetaData
- */
 export async function fetchPosts(): Promise<PostMetadata[]> {
   const response = await fetch("/posts.json");
 
@@ -15,17 +12,16 @@ export async function fetchPosts(): Promise<PostMetadata[]> {
   return posts;
 }
 
-/**
- * Fetch specific article
- */
-export async function fetchArticle(fileName: string): Promise<string | null> {
+export async function fetchPostDetail(
+  fileName: string,
+): Promise<string | null> {
   const response = await fetch(`/_posts/${fileName}`);
 
   if (!response.ok) {
-    console.error("Failed to fetch article", response.statusText);
+    console.error("Failed to fetch postDetail", response.statusText);
     return null;
   }
 
-  const article = await response.text();
-  return article;
+  const postDetail = await response.text();
+  return postDetail;
 }
