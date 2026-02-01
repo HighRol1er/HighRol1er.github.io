@@ -16,6 +16,7 @@ export const slugify = (text: string): string => {
   const slug = text
     .toLowerCase()
     .trim()
+    .replace(/[^\w\sㄱ-ㅎ가-힣-]/g, "") // 한글, 영문, 숫자, 공백, 하이픈 제외 모두 제거
     .replace(/\s+/g, "-") // 공백 -> '-'
     .replace(/-+/g, "-"); // 연속된 하이픈 제거
   return slug;
