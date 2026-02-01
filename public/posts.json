@@ -1,5 +1,14 @@
 [
   {
+    "title": "고차 컴포넌트 - HoC 패턴",
+    "tags": [
+      "React",
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-02-01",
+    "fileName": "react-hoc-pattern.md"
+  },
+  {
     "title": "Dependency Injection - 의존성 주입",
     "tags": [
       "Design-Pattern"
@@ -19,7 +28,8 @@
   {
     "title": "합성 컴포넌트",
     "tags": [
-      "React"
+      "React",
+      "Design-Pattern"
     ],
     "timestamp": "2026-01-28",
     "fileName": "composition-component.md"
@@ -73,14 +83,6 @@
     ],
     "timestamp": "2026-01-27",
     "fileName": "spa-and-map.md"
-  },
-  {
-    "title": "TEST",
-    "tags": [
-      "test"
-    ],
-    "timestamp": "2026-01-27",
-    "fileName": "test.md"
   },
   {
     "title": "AJAX + XML 개념정리",

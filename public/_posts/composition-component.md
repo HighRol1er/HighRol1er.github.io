@@ -1,6 +1,6 @@
 ---
 title: 합성 컴포넌트
-tags: [React]
+tags: [React, Design-Pattern]
 date: 2026-01-28
 ---
 
