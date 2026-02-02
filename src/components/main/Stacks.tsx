@@ -1,11 +1,4 @@
-import {
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import { SpotlightCard } from "@/components/common/cards";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const Stacks = () => {
   return (
