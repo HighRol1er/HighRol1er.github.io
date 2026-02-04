@@ -12,6 +12,9 @@ import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 
 export const PostDetailPage = () => {
   const { posts, isLoading } = useFetchPosts();
@@ -73,8 +76,8 @@ export const PostDetailPage = () => {
           {/* 본문 */}
           <article className="markdown-body">
             <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
+              remarkPlugins={[remarkGfm, remarkMath]}
+              rehypePlugins={[rehypeRaw, rehypeKatex]}
               components={ComponentConfig}
             >
               {content}

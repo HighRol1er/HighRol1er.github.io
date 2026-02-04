@@ -1,6 +1,14 @@
 [
   {
-    "title": "고차 컴포넌트 - HoC 패턴",
+    "title": "프로그래머스 입문 알고리즘 100문제",
+    "tags": [
+      "Algorithm"
+    ],
+    "timestamp": "2026-02-04",
+    "fileName": "programmers-algo-intro.md"
+  },
+  {
+    "title": "HoC 패턴 - 고차 컴포넌트",
     "tags": [
       "React",
       "Design-Pattern"
