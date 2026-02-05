@@ -1,6 +1,6 @@
 ---
-title: Fly Weight Pattern
-tags: [Design-Pattern]
+title: Flyweight Pattern
+tags: [GoF, Design-Pattern]
 date: 2026-01-26
 ---
 
