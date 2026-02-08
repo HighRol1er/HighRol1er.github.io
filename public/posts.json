@@ -1,8 +1,18 @@
 [
   {
+    "title": "Factory Method Pattern",
+    "tags": [
+      "GoF",
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-02-08",
+    "fileName": "gof-factory-method.md"
+  },
+  {
     "title": "프로그래머스 입문 알고리즘 100문제",
     "tags": [
-      "Algorithm"
+      "Algorithm",
+      "Doodle"
     ],
     "timestamp": "2026-02-04",
     "fileName": "programmers-algo-intro.md"
@@ -90,7 +100,7 @@
       "MPA"
     ],
     "timestamp": "2026-01-27",
-    "fileName": "spa-and-map.md"
+    "fileName": "spa-vs-mpa.md"
   },
   {
     "title": "AJAX + XML 개념정리",
@@ -109,12 +119,13 @@
     "fileName": "ws-opt.md"
   },
   {
-    "title": "Fly Weight Pattern",
+    "title": "Flyweight Pattern",
     "tags": [
+      "GoF",
       "Design-Pattern"
     ],
     "timestamp": "2026-01-26",
-    "fileName": "flyweight.md"
+    "fileName": "gof-flyweight.md"
   },
   {
     "title": "리액트의 렌더링 과정 살펴보기",
