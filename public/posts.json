@@ -1,5 +1,14 @@
 [
   {
+    "title": "Abstract Factory Pattern",
+    "tags": [
+      "GoF",
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-02-09",
+    "fileName": "gof-abstract-factory.md"
+  },
+  {
     "title": "Factory Method Pattern",
     "tags": [
       "GoF",
