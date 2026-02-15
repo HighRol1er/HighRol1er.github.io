@@ -1,5 +1,14 @@
 [
   {
+    "title": "Builder Pattern With TypeScript",
+    "tags": [
+      "GoF",
+      "Design-Pattern"
+    ],
+    "timestamp": "2026-02-15",
+    "fileName": "gof-builder.md"
+  },
+  {
     "title": "Abstract Factory Pattern",
     "tags": [
       "GoF",

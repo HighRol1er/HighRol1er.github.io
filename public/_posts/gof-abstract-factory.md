@@ -23,9 +23,9 @@ date: 2026-02-09
 
 ![abstract-factory](abstract-factory/abstract-factory1.webp)
 
-1. Concrete Product는 Abstract Product를 상속
-2. Concrete Factory는 Concrete Product에 의존 + Abstract Factory를 구현
-3. Client는 Abstract Factory를 참조
+- Concrete Product는 Abstract Product를 상속
+- Concrete Factory는 Concrete Product에 의존 + Abstract Factory를 구현
+- Client는 Abstract Factory를 참조
 
 # 코드로 살펴보기
 

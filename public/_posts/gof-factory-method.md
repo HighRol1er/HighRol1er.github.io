@@ -71,9 +71,9 @@ createAnimal("cat");
 
 해당 UML을 화살표의 관계로서 표현하면 다음과 같다.
 
-1. Concrete Product 는 Product의 구현체
-2. Creator는 Product를 의존한다.
-3. Concrete Creator는 Creator를 상속한다.
+- Concrete Product 는 Product의 구현체
+- Creator는 Product를 의존한다.
+- Concrete Creator는 Creator를 상속한다.
 
 > [!tip]
 > UML 화살표의 의미를 참고해서 다이어그램을 이해하는 것이 좋다.
